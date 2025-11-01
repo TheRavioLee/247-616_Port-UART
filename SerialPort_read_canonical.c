@@ -1,5 +1,5 @@
 /**
- * @file    SerialPort_read.c
+ * @file    SerialPort_read_canonical.c
  * 
  * @brief Serial Port Programming in C (Serial Port Read)  
  * Non Cannonical mode   
@@ -61,7 +61,9 @@ void main(void)
 	
 	SerialPortSettings.c_iflag &= ~(IXON | IXOFF | IXANY);          // Disable XON/XOFF flow control both i/p and o/p
 
-	SerialPortSettings.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);  // Non Cannonical mode, Disable echo, Disable signal  
+	SerialPortSettings.c_lflag |= ICANON;
+
+	SerialPortSettings.c_lflag &= ~(ECHO | ECHOE | ISIG);
 
 	SerialPortSettings.c_oflag &= ~OPOST;	// No Output Processing
 
